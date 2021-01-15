@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+   <div class="container">
+       <div class="jumbotron">
+       <div class="row">
+           <div class="col-4"></div>
+           <div class="col-4"> Create Your POsts</div>
+           <div class="col-4"></div>
+       </div>
+       <div class="row">
+        <div class="col-4"></div>
+        <div class="col-4">
+            
+            <label for="">postid:</label>
+            <input type="text" class="form-control" id="pid"><br>
+            <button type="button" class="btn btn-success" onclick="detpost()">DeletePost</button>
+
+        </div>
+        <div class="col-4"></div>
+    </div>
+       </div>
+       
+   
+   <div class="row">
+<div class="col-4"></div>
+<div class="col-4"> <label id="la"></label> </div>
+<div class="col-4"></div>
+   </div>
+   </div>
+</body>
+<script>
+    const xhr=new XMLHttpRequest()
+    var url=""
+    function detpost(){
+        var pid=document.querySelector("#pid").value
+        url="https://jsonplaceholder.typicode.com/posts/"+pid
+        deletepost(url)
+    }
+
+    
+  
+   function deletepost(url){
+       
+    xhr.open("delete",url)
+      xhr.send()
+   }
+    xhr.onreadystatechange=()=>{
+        if(xhr.readyState==4){
+            if((xhr.status>=200)&(xhr.status<300)){
+                console.log("sucess")
+                console.log(xhr.status)
+                //alert(xhr.responseText)
+               // var post=JSON.parse(xhr.responseText)
+                //console.log(post)
+                //var html_data=""
+                //html_data=html_data+"<tr><td>"+post.userId+"</td><td>"+post.id+"</td><td>"+post.title+"</td></tr>"
+                document.querySelector("#la").innerHTML="sucessful deletion"
+              // alert("sucessful deletion")
+
+
+
+            }
+            else{
+                console.log(xhr.status)
+            }
+            console.log("tast complete")
+        }
+    }
+</script>
+</html>
